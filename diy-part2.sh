@@ -13,12 +13,16 @@
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate
 
-# 移除要替换的包,添加luci-app-mosdns
+C 移除要替换的包,添加luci-app-mosdns
 rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/mosdns
 git clone https://github.com/sbwml/luci-app-mosdns -b v5 mosdns
 cp -rf mosdns/luci-app-mosdns feeds/luci/applications/luci-app-mosdns
 cp -rf mosdns/mosdns feeds/packages/net/mosdns
+
+# 修复GN编译错误
+git clone https://github.com/fw876/helloworld fw876_helloworld
+cp -rf fw876_helloworld/gn package/feeds/helloworld/gn
 
 # 添加v2dat补丁
 #rm -rf feeds/packages/utils/v2dat
